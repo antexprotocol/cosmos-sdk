@@ -14,8 +14,10 @@ import (
 	abci "github.com/cometbft/cometbft/abci/types"
 	cmtcmd "github.com/cometbft/cometbft/cmd/cometbft/commands"
 	cmtcfg "github.com/cometbft/cometbft/config"
+
+	snnode "github.com/antexprotocol/supernova/node"
+	sntypes "github.com/antexprotocol/supernova/types"
 	"github.com/cometbft/cometbft/node"
-	"github.com/cometbft/cometbft/p2p"
 	pvm "github.com/cometbft/cometbft/privval"
 	"github.com/cometbft/cometbft/proxy"
 	gogoproto "github.com/cosmos/gogoproto/proto"
@@ -54,7 +56,7 @@ var (
 )
 
 type CometBFTServer[T transaction.Tx] struct {
-	Node      *node.Node
+	Node      *snnode.Node
 	Consensus abci.Application
 
 	logger        log.Logger
@@ -242,7 +244,7 @@ func (s *CometBFTServer[T]) Start(ctx context.Context) error {
 		return svr.Start()
 	}
 
-	nodeKey, err := p2p.LoadOrGenNodeKey(s.config.ConfigTomlConfig.NodeKeyFile())
+	nodeKey, err := sntypes.LoadOrGenNodeKey(s.config.ConfigTomlConfig.NodeKeyFile())
 	if err != nil {
 		return err
 	}
@@ -256,7 +258,7 @@ func (s *CometBFTServer[T]) Start(ctx context.Context) error {
 		return err
 	}
 
-	s.Node, err = node.NewNode(
+	s.Node, err = snnode.NewNode(
 		ctx,
 		s.config.ConfigTomlConfig,
 		pv,
@@ -267,6 +269,7 @@ func (s *CometBFTServer[T]) Start(ctx context.Context) error {
 		node.DefaultMetricsProvider(s.config.ConfigTomlConfig.Instrumentation),
 		wrappedLogger,
 	)
+
 	if err != nil {
 		return err
 	}
