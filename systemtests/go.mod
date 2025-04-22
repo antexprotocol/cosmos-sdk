@@ -1,6 +1,6 @@
 module cosmossdk.io/systemtests
 
-go 1.23
+go 1.24.2
 
 require (
 	cosmossdk.io/math v1.5.0

@@ -1,6 +1,6 @@
 module cosmossdk.io/server/v2/cometbft
 
-go 1.23.2
+go 1.24.2
 
 replace (
 	cosmossdk.io/server/v2 => ../
@@ -154,7 +154,7 @@ require (
 	github.com/spf13/cast v1.7.1 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
-	github.com/supranational/blst v0.3.13 // indirect
+	github.com/supranational/blst v0.3.14 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20220721030215-126854af5e6d // indirect
 	github.com/tendermint/go-amino v0.16.0 // indirect
 	github.com/tidwall/btree v1.7.0 // indirect
@@ -184,3 +184,5 @@ require (
 	gotest.tools/v3 v3.5.1 // indirect
 	pgregory.net/rapid v1.1.0 // indirect
 )
+
+replace github.com/cosmos/cosmos-sdk => ./../../

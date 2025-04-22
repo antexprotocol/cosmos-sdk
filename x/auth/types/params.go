@@ -47,6 +47,10 @@ func (p Params) SigVerifyCostSecp256r1() uint64 {
 	return p.SigVerifyCostSecp256k1 / 2
 }
 
+func (p Params) SigVerifyCostBLS12_381() uint64 {
+	return p.SigVerifyCostED25519
+}
+
 func validateTxSigLimit(i interface{}) error {
 	v, ok := i.(uint64)
 	if !ok {

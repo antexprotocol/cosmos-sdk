@@ -1,6 +1,6 @@
 module cosmossdk.io/orm
 
-go 1.23
+go 1.24.2
 
 require (
 	cosmossdk.io/api v0.8.0

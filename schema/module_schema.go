@@ -104,7 +104,7 @@ func (s ModuleSchema) LookupStateObjectType(name string) (t StateObjectType, fou
 }
 
 // AllTypes calls the provided function for each type in the module schema and stops if the function returns false.
-// The types are iterated over in sorted order by name. This function is compatible with go 1.23 iterators.
+// The types are iterated over in sorted order by name. This function is compatible with go 1.24.2 iterators.
 func (s ModuleSchema) AllTypes(f func(Type) bool) {
 	keys := make([]string, 0, len(s.types))
 	for k := range s.types {

@@ -35,18 +35,18 @@ type TypeSet interface {
 	LookupStateObjectType(name string) (t StateObjectType, found bool)
 
 	// AllTypes calls the given function for each type in the type set.
-	// This function is compatible with go 1.23 iterators and can be used like this:
+	// This function is compatible with go 1.24.2 iterators and can be used like this:
 	// for t := range types.AllTypes {
 	//     // do something with t
 	// }
 	AllTypes(f func(Type) bool)
 
 	// EnumTypes calls the given function for each EnumType in the type set.
-	// This function is compatible with go 1.23 iterators.
+	// This function is compatible with go 1.24.2 iterators.
 	EnumTypes(f func(EnumType) bool)
 
 	// StateObjectTypes calls the given function for each StateObjectType in the type set.
-	// This function is compatible with go 1.23 iterators.
+	// This function is compatible with go 1.24.2 iterators.
 	StateObjectTypes(f func(objectType StateObjectType) bool)
 
 	// isTypeSet is a private method that ensures that only types in this package can be marked as type sets.

@@ -6,8 +6,8 @@ localnet-build-dlv:
 	$(MAKE) -C contrib/images simd-dlv
 #? localnet-build-nodes: Start localnet node
 localnet-build-nodes:
-	$(DOCKER) run --rm -v $(CURDIR)/.testnets:/data cosmossdk/simd \
-			  testnet init-files -n 4 -o /data --starting-ip-address 192.168.10.2 --keyring-backend=test --listen-ip-address 0.0.0.0
+	$(DOCKER) run --rm -v $(CURDIR)/.testnets:/data -e BINARY=simdv2 cosmossdk/simd \
+			  testnet init-files -n 4 -o /data --starting-ip-address 192.168.10.2 --keyring-backend=test --key-type bls12_381 --listen-ip-address 0.0.0.0
 	docker-compose up -d
 
 #? localnet-stop: Stop localnet node

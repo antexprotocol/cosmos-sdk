@@ -1,6 +1,6 @@
 module cosmossdk.io/x/staking
 
-go 1.23.2
+go 1.24.2
 
 require (
 	cosmossdk.io/api v0.8.1
@@ -145,7 +145,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/google/flatbuffers v24.3.25+incompatible // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
-	github.com/supranational/blst v0.3.13 // indirect
+	github.com/supranational/blst v0.3.14 // indirect
 	go.opencensus.io v0.24.0 // indirect
 )
 

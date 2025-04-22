@@ -1,6 +1,6 @@
 module cosmossdk.io/collections/protocodec
 
-go 1.23.2
+go 1.24.2
 
 require (
 	cosmossdk.io/collections v1.0.0

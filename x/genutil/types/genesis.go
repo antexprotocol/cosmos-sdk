@@ -274,6 +274,7 @@ func (cs *ConsensusGenesis) ValidateAndComplete() error {
 
 	if cs.Params == nil {
 		cs.Params = cmttypes.DefaultConsensusParams()
+		cs.Params.Validator.PubKeyTypes = []string{cmttypes.ABCIPubKeyTypeEd25519, cmttypes.ABCIPubKeyTypeSecp256k1, cmttypes.ABCIPubKeyTypeBls12381}
 	} else if err := cs.Params.ValidateBasic(); err != nil {
 		return err
 	}

@@ -17,6 +17,7 @@ import (
 	txsigning "cosmossdk.io/x/tx/signing"
 
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
+	"github.com/cosmos/cosmos-sdk/crypto/keys/bls12_381"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
 	kmultisig "github.com/cosmos/cosmos-sdk/crypto/keys/multisig"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
@@ -29,6 +30,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
+	blst "github.com/supranational/blst/bindings/go"
 )
 
 var (
@@ -153,6 +155,16 @@ func (svd SigVerificationDecorator) VerifyIsOnCurve(pubKey cryptotypes.PubKey) e
 		}
 		if !ok {
 			return errorsmod.Wrap(sdkerrors.ErrInvalidPubKey, "some keys are not on curve")
+		}
+
+	case *bls12_381.PubKey:
+		raw := typedPubKey.Bytes()
+		p := new(blst.P1Affine).Deserialize(raw)
+		if p == nil {
+			return errorsmod.Wrap(sdkerrors.ErrInvalidPubKey, "bls12_381 key deserialization failed")
+		}
+		if !p.InG1() {
+			return errorsmod.Wrap(sdkerrors.ErrInvalidPubKey, "bls12_381 key is not on curve")
 		}
 
 	default:
@@ -557,6 +569,9 @@ func DefaultSigVerificationGasConsumer(meter gas.Meter, sig signing.SignatureV2,
 		}
 
 		return nil
+
+	case *bls12_381.PubKey:
+		return meter.Consume(params.SigVerifyCostBLS12_381(), "ante verify: bls12_381")
 
 	default:
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidPubKey, "unrecognized public key type: %T", pubkey)

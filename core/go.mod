@@ -3,7 +3,7 @@ module cosmossdk.io/core
 // Core is meant to have only a dependency on cosmossdk.io/schema, so we can use it as a dependency
 // in other modules without having to worry about circular dependencies.
 
-go 1.23
+go 1.24.2
 
 require cosmossdk.io/schema v1.0.0
 

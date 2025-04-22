@@ -1,6 +1,6 @@
 module cosmossdk.io/server/v2/stf
 
-go 1.23
+go 1.24.2
 
 require (
 	cosmossdk.io/core v1.0.0

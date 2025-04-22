@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine AS build
+FROM golang:1.24-alpine AS build
 
 RUN apk add build-base git linux-headers
 
@@ -32,7 +32,7 @@ COPY core/testing/go.mod core/testing/go.sum /work/core/testing/
 RUN go mod download
 
 COPY ./ /work
-RUN LEDGER_ENABLED=false make clean build
+RUN LEDGER_ENABLED=false CGO_ENABLED=1 COSMOS_BUILD_OPTIONS="bls12381 v2" make clean build
 
 
 FROM alpine AS run
