@@ -6,7 +6,7 @@ localnet-build-dlv:
 	$(MAKE) -C contrib/images simd-dlv
 #? localnet-init-nodes: Start localnet node
 localnet-init-nodes:
-	mkdir .testnets
+	mkdir -p .testnets
 	$(DOCKER) run --rm -v $(CURDIR)/.testnets:/data -e BINARY=simdv2 cosmossdk/simd \
 			  testnet init-files -n 4 -o /data --starting-ip-address 192.168.10.2 --keyring-backend=test --key-type bls12_381 --listen-ip-address 0.0.0.0
 

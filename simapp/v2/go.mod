@@ -1,8 +1,6 @@
 module cosmossdk.io/simapp/v2
 
-go 1.24.0
-
-toolchain go1.24.2
+go 1.24.2
 
 require (
 	cosmossdk.io/api v0.8.1
@@ -78,7 +76,7 @@ require (
 	github.com/DataDog/zstd v1.5.6 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/OffchainLabs/prysm/v6 v6.0.0 // indirect
-	github.com/antexprotocol/supernova v0.0.1 // indirect
+	github.com/antexprotocol/supernova v0.0.4 // indirect
 	github.com/aristanetworks/goarista v0.0.0-20200805130819-fd197cf57d96 // indirect
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
 	github.com/aybabtme/uniplot v0.0.0-20151203143629-039c559e5e7e // indirect
