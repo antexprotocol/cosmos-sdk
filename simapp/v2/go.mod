@@ -13,7 +13,7 @@ require (
 	cosmossdk.io/runtime/v2 v2.0.0-00010101000000-000000000000
 	cosmossdk.io/server/v2 v2.0.0-beta.1
 	cosmossdk.io/server/v2/appmanager v1.0.0-beta.2
-	cosmossdk.io/server/v2/cometbft v0.0.0-20241015140036-ee3d320eaa55
+	// cosmossdk.io/server/v2/cometbft v0.0.0-20241015140036-ee3d320eaa55
 	cosmossdk.io/store/v2 v2.0.0
 	cosmossdk.io/tools/benchmark v0.2.0-rc.1
 	cosmossdk.io/tools/confix v0.0.0-00010101000000-000000000000
@@ -52,6 +52,14 @@ require (
 )
 
 require (
+	cosmossdk.io/errors v1.0.1
+	cosmossdk.io/server/v2/cometbft v0.0.0-00010101000000-000000000000
+	github.com/OffchainLabs/prysm/v6 v6.0.0
+	github.com/ethereum/go-ethereum v1.15.0
+	github.com/libp2p/go-libp2p v0.36.5
+)
+
+require (
 	buf.build/gen/go/cometbft/cometbft/protocolbuffers/go v1.36.2-20241120201313-68e42a58b301.1 // indirect
 	buf.build/gen/go/cosmos/gogo-proto/protocolbuffers/go v1.36.2-20240130113600-88ef6483f90f.1 // indirect
 	cloud.google.com/go v0.118.0 // indirect
@@ -62,7 +70,6 @@ require (
 	cloud.google.com/go/storage v1.43.0 // indirect
 	cosmossdk.io/collections v1.0.0 // indirect
 	cosmossdk.io/core/testing v0.0.1 // indirect
-	cosmossdk.io/errors v1.0.1 // indirect
 	cosmossdk.io/errors/v2 v2.0.0 // indirect
 	cosmossdk.io/schema v1.0.0 // indirect
 	cosmossdk.io/server/v2/stf v1.0.0-beta.2 // indirect
@@ -75,8 +82,7 @@ require (
 	github.com/DataDog/datadog-go v4.8.3+incompatible // indirect
 	github.com/DataDog/zstd v1.5.6 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
-	github.com/OffchainLabs/prysm/v6 v6.0.0 // indirect
-	github.com/antexprotocol/supernova v0.0.4 // indirect
+	github.com/antexprotocol/supernova v0.0.13 // indirect
 	github.com/aristanetworks/goarista v0.0.0-20200805130819-fd197cf57d96 // indirect
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
 	github.com/aybabtme/uniplot v0.0.0-20151203143629-039c559e5e7e // indirect
@@ -138,7 +144,6 @@ require (
 	github.com/elazarl/go-bindata-assetfs v1.0.0 // indirect
 	github.com/emicklei/dot v1.6.2 // indirect
 	github.com/ethereum/c-kzg-4844 v1.0.0 // indirect
-	github.com/ethereum/go-ethereum v1.15.0 // indirect
 	github.com/ethereum/go-verkle v0.2.2 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
@@ -218,7 +223,6 @@ require (
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
 	github.com/libp2p/go-flow-metrics v0.1.0 // indirect
-	github.com/libp2p/go-libp2p v0.36.5 // indirect
 	github.com/libp2p/go-libp2p-asn-util v0.4.1 // indirect
 	github.com/libp2p/go-libp2p-mplex v0.9.0 // indirect
 	github.com/libp2p/go-libp2p-pubsub v0.13.0 // indirect
