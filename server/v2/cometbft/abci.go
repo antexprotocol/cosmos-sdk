@@ -495,6 +495,7 @@ func (c *consensus[T]) FinalizeBlock(
 	if resp == nil { // if we didn't run OE, run the normal finalize block
 		resp, newState, decodedTxs, err = c.internalFinalizeBlock(ctx, req)
 		if err != nil {
+			c.logger.Error("failed to internalFinalizeBlock", "err", err)
 			return nil, err
 		}
 	}
@@ -503,10 +504,12 @@ func (c *consensus[T]) FinalizeBlock(
 	// from the store.
 	stateChanges, err := newState.GetStateChanges()
 	if err != nil {
+		c.logger.Error("failed to GetStateChanges", "err", err)
 		return nil, err
 	}
 	appHash, err := c.store.Commit(&store.Changeset{Version: uint64(req.Height), Changes: stateChanges})
 	if err != nil {
+		c.logger.Error("failed to commit the changeset", "err", err)
 		return nil, fmt.Errorf("unable to commit the changeset: %w", err)
 	}
 
@@ -521,12 +524,14 @@ func (c *consensus[T]) FinalizeBlock(
 	// listen to state streaming changes in accordance with the block
 	err = c.streamDeliverBlockChanges(ctx, req.Height, req.Txs, decodedTxs, resp.TxResults, events, stateChanges)
 	if err != nil {
+		c.logger.Error("failed to streamDeliverBlockChanges", "err", err)
 		return nil, err
 	}
 
 	// remove txs from the mempool
 	for _, tx := range decodedTxs {
 		if err = c.mempool.Remove(tx); err != nil {
+			c.logger.Error("failed to remove tx from mempool", "err", err)
 			return nil, fmt.Errorf("unable to remove tx: %w", err)
 		}
 	}
@@ -535,6 +540,7 @@ func (c *consensus[T]) FinalizeBlock(
 
 	cp, err := GetConsensusParams(ctx, c.app) // we get the consensus params from the latest state because we committed state above
 	if err != nil {
+		c.logger.Error("failed to GetConsensusParams", "err", err)
 		return nil, err
 	}
 
