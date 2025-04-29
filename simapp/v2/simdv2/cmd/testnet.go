@@ -40,6 +40,8 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
+
+	cryptocodec "github.com/cosmos/cosmos-sdk/crypto/codec"
 )
 
 var (
@@ -178,9 +180,10 @@ func initTestnetFiles[T transaction.Tx](
 	valPubKeys := make([]cryptotypes.PubKey, args.numValidators)
 
 	var (
-		genAccounts []authtypes.GenesisAccount
-		genBalances []banktypes.Balance
-		genFiles    []string
+		genAccounts   []authtypes.GenesisAccount
+		genBalances   []banktypes.Balance
+		genFiles      []string
+		genValidators []sdk.GenesisValidator
 	)
 	const (
 		rpcPort       = 26657
@@ -326,6 +329,19 @@ func initTestnetFiles[T transaction.Tx](
 			return err
 		}
 
+		// add validators to genesis
+		pk, err := cryptocodec.PubKeyFromProto(valPubKeys[i])
+		if err != nil {
+			return err
+		}
+
+		genValidators = append(genValidators, sdk.GenesisValidator{
+			Address: sdk.ConsAddress(pk.Address()),
+			PubKey:  pk,
+			Power:   valTokens.Int64(),
+			Name:    nodeConfig.Moniker,
+		})
+
 		txBuilder := clientCtx.TxConfig.NewTxBuilder()
 		if err := txBuilder.SetMsgs(createValMsg); err != nil {
 			return err
@@ -378,7 +394,7 @@ func initTestnetFiles[T transaction.Tx](
 	err := collectGenFiles(
 		clientCtx, nodeConfig, args.chainID, nodeIDs, valPubKeys, args.numValidators,
 		args.outputDir, args.nodeDirPrefix, args.nodeDaemonHome,
-		rpcPort, p2pPortStart, args.singleMachine,
+		rpcPort, p2pPortStart, args.singleMachine, genValidators,
 	)
 	if err != nil {
 		return err
@@ -443,6 +459,7 @@ func collectGenFiles(
 	outputDir, nodeDirPrefix, nodeDaemonHome string,
 	rpcPortStart, p2pPortStart int,
 	singleMachine bool,
+	genValidators []sdk.GenesisValidator,
 ) error {
 	var appState json.RawMessage
 	genTime := cmttime.Now()
@@ -483,7 +500,7 @@ func collectGenFiles(
 		genFile := nodeConfig.GenesisFile()
 
 		// overwrite each validator's genesis file to have a canonical genesis time
-		if err := genutil.ExportGenesisFileWithTime(genFile, chainID, nil, appState, genTime); err != nil {
+		if err := genutil.ExportGenesisFileWithTime(genFile, chainID, genValidators, appState, genTime); err != nil {
 			return err
 		}
 	}

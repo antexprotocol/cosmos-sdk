@@ -12,7 +12,6 @@ import (
 	cmtcrypto "github.com/cometbft/cometbft/crypto"
 	cmtbls12381 "github.com/cometbft/cometbft/crypto/bls12381"
 	tmed25519 "github.com/cometbft/cometbft/crypto/ed25519"
-	"github.com/cometbft/cometbft/p2p"
 	"github.com/cometbft/cometbft/privval"
 	"github.com/cosmos/go-bip39"
 
@@ -20,6 +19,8 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/genutil/types"
+
+	sntypes "github.com/antexprotocol/supernova/types"
 )
 
 // ExportGenesisFile creates and writes the genesis configuration to disk. An
@@ -63,7 +64,7 @@ func InitializeNodeValidatorFilesFromMnemonic(config *cfg.Config, mnemonic, keyT
 	if len(mnemonic) > 0 && !bip39.IsMnemonicValid(mnemonic) {
 		return "", nil, errors.New("invalid mnemonic")
 	}
-	nodeKey, err := p2p.LoadOrGenNodeKey(config.NodeKeyFile())
+	nodeKey, err := sntypes.LoadOrGenNodeKey(config.NodeKeyFile())
 	if err != nil {
 		return "", nil, err
 	}
