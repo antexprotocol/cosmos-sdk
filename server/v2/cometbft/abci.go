@@ -594,6 +594,8 @@ func (c *consensus[T]) internalFinalizeBlock(
 		LastCommit:      toCoreCommitInfo(req.DecidedLastCommit),
 	})
 
+	// fmt.Printf("DeliverBlock, ciCtx.LastCommit: %v, blockReq: %v, req.DecidedLastCommit: %v\n", toCoreCommitInfo(req.DecidedLastCommit), blockReq, req.DecidedLastCommit)
+
 	resp, stateChanges, err := c.app.DeliverBlock(ciCtx, blockReq)
 
 	return resp, stateChanges, decodedTxs, err

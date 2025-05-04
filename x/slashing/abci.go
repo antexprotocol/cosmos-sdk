@@ -25,6 +25,7 @@ func BeginBlocker(ctx context.Context, k keeper.Keeper, cometService comet.Servi
 	}
 	ci := cometService.CometInfo(ctx)
 	for _, vote := range ci.LastCommit.Votes {
+		// fmt.Println(fmt.Sprintf("vote, addr: %X, power: %d", vote.Validator.Address, vote.Validator.Power))
 		err := k.HandleValidatorSignatureWithParams(ctx, params, vote.Validator.Address, vote.Validator.Power, vote.BlockIDFlag)
 		if err != nil {
 			return err

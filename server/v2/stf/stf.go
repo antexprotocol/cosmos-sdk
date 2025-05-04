@@ -155,7 +155,8 @@ func (s STF[T]) deliverBlock(
 	exCtx.events = make([]event.Event, 0)
 	// begin block
 	var beginBlockEvents []event.Event
-	if !block.IsGenesis {
+	// block 1 is gentx, do not call begin block
+	if !block.IsGenesis && block.Height > 1 {
 		// begin block
 		beginBlockEvents, err = s.beginBlock(exCtx)
 		if err != nil {

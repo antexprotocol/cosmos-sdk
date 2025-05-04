@@ -37,7 +37,7 @@ func TestInitTestFilesCmd(t *testing.T) {
 	require.NoError(t, rootCmd.Execute())
 }
 
-func TestInitBoostrapNodesCmd(t *testing.T) {
+func TestInitBootstrapNodesCmd(t *testing.T) {
 	for i := 0; i < 4; i++ {
 		privKey, err := privKeyFromFile(fmt.Sprintf("../../../../.testnets/node%d/simdv2/network-keys", i))
 		require.NoError(t, err)

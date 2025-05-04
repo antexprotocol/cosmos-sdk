@@ -43,7 +43,10 @@ func (k Keeper) GetValidatorByConsAddr(ctx context.Context, consAddr sdk.ConsAdd
 			return types.Validator{}, err
 		}
 
+		// fmt.Println(fmt.Sprintf("consAddr 1: %X", consAddr))
+
 		newConsAddr, err := k.OldToNewConsAddrMap.Get(ctx, consAddr.Bytes())
+		// fmt.Println(fmt.Sprintf("newConsAddr 2: %X", newConsAddr))
 		if err != nil {
 			if errors.Is(err, collections.ErrNotFound) {
 				return types.Validator{}, types.ErrNoValidatorFound
@@ -61,6 +64,8 @@ func (k Keeper) GetValidatorByConsAddr(ctx context.Context, consAddr sdk.ConsAdd
 
 		opAddr = operatorAddr
 	}
+
+	// fmt.Println(fmt.Sprintf("opAddr 3: %X", opAddr))
 
 	if opAddr == nil {
 		return types.Validator{}, types.ErrNoValidatorFound
