@@ -40,7 +40,7 @@ require (
 	github.com/DataDog/zstd v1.5.6 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/OffchainLabs/prysm/v6 v6.0.0 // indirect
-	github.com/antexprotocol/supernova v0.0.27 // indirect
+	github.com/antexprotocol/supernova v0.0.34 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bgentry/speakeasy v0.2.0 // indirect
 	github.com/bytedance/sonic v1.12.6 // indirect

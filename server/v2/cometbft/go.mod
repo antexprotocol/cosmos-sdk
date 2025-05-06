@@ -26,7 +26,7 @@ require (
 	cosmossdk.io/server/v2/stf v1.0.0-beta.2
 	cosmossdk.io/store/v2 v2.0.0-beta.1
 	cosmossdk.io/x/consensus v0.0.0-00010101000000-000000000000
-	github.com/antexprotocol/supernova v0.0.27
+	github.com/antexprotocol/supernova v0.0.34
 	github.com/cometbft/cometbft v1.0.0
 	github.com/cometbft/cometbft/api v1.0.0
 	github.com/cosmos/cosmos-sdk v0.53.0
