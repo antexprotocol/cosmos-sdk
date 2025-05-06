@@ -138,7 +138,7 @@ func (oe *OptimisticExecution[T]) AbortIfNeeded(reqHash []byte) bool {
 	defer oe.mtx.Unlock()
 
 	if !bytes.Equal(oe.request.Hash, reqHash) {
-		oe.logger.Error("OE aborted due to hash mismatch", "oe_hash", hex.EncodeToString(oe.request.Hash), "req_hash", hex.EncodeToString(reqHash), "oe_height", oe.request.Height, "req_height", oe.request.Height)
+		// oe.logger.Error("OE aborted due to hash mismatch", "oe_hash", hex.EncodeToString(oe.request.Hash), "req_hash", hex.EncodeToString(reqHash), "oe_height", oe.request.Height, "req_height", oe.request.Height)
 		oe.cancelFunc()
 		return true
 	} else if oe.abortRate > 0 && rand.Intn(100) < oe.abortRate {
