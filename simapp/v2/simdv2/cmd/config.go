@@ -93,7 +93,7 @@ func initCometConfig() cometbft.CfgOption {
 func initCometOptions[T transaction.Tx]() cometbft.ServerOptions[T] {
 	serverOptions := cometbft.DefaultServerOptions[T]()
 	// Implement custom handlers (e.g. for Vote Extensions)
-	// serverOptions.PrepareProposalHandler = CustomPrepareProposal[T]()
+	serverOptions.PrepareProposalHandler = CustomPrepareProposal[T]()
 	// serverOptions.ProcessProposalHandler = CustomProcessProposalHandler[T]()
 	// serverOptions.ExtendVoteHandler = CustomExtendVoteHandler[T]()
 
