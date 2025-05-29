@@ -149,6 +149,8 @@ func AddTxFlagsToCmd(cmd *cobra.Command) {
 	f.String(FlagGas, "", fmt.Sprintf("gas limit to set per-transaction; set to %q to calculate sufficient gas automatically. Note: %q option doesn't always report accurate results. Set a valid coin value to adjust the result. Can be used instead of %q. (default %d)",
 		GasFlagAuto, GasFlagAuto, FlagFees, DefaultGasLimit))
 
+	cmd.MarkFlagsRequiredTogether(FlagUnordered, FlagTimeoutTimestamp)
+
 	AddKeyringFlags(f)
 }
 
