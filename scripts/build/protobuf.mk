@@ -1,6 +1,9 @@
-protoVer=0.15.3
+protoVer=0.17.0
 protoImageName=ghcr.io/cosmos/proto-builder:$(protoVer)
 protoImage=$(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace $(protoImageName)
+
+# how to build the proto-builder image:
+# docker build --pull --rm -f "contrib/devtools/Dockerfile" -t ghcr.io/cosmos/proto-builder:0.17.0 "contrib/devtools"
 
 #? proto-all: Run make proto-format proto-lint proto-gen
 proto-all: proto-format proto-lint proto-gen
