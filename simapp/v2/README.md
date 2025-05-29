@@ -120,3 +120,16 @@ Now you have a small testnet that you can use to try out changes to the Cosmos S
 
 If this happens, you can try to create and start the network first
 with a single validator and then add additional validators using a `create-validator` transaction.
+
+### 7. Get localnet p2p node info
+start nodes once
+```bash
+make localnet-start
+```
+
+run test to generate p2p
+```bash
+cd simapp/v2/simdv2/cmd && go test -v -run TestInitBootstrapNodesCmd
+```
+
+config to Nodes's config/config.toml persistent_peers
